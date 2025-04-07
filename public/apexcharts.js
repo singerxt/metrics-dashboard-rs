@@ -133,7 +133,7 @@ window.ApexOptionsLine = {
   },
   xaxis: {
     type: "datetime",
-    range: 300000,
+    range: 100000,
   },
   legend: {
     show: true,

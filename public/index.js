@@ -49,7 +49,7 @@ const LineChart = ({ idx, metrics, desc, unit }) => {
           setValue(value);
         }
         data[m].push([date, value]);
-        if (data[m].length > 1000) {
+        if (data[m].length > 15000) {
           data[m].shift();
         }
       });
