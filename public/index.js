@@ -17,9 +17,11 @@ const LineChart = ({ idx, metrics, desc, unit }) => {
     if (!elm) {
       return;
     }
+
     if (!metrics) {
       return;
     }
+
     const isMulti = metrics?.length > 1;
     const data = {};
     const opts = Object.assign({}, window.ApexOptionsLine);
@@ -192,7 +194,7 @@ function App() {
       }
     };
     load();
-    const interval = setInterval(load, 5000);
+    const interval = setInterval(load, 500);
 
     return () => {
       clearInterval(interval);
