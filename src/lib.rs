@@ -39,7 +39,6 @@ pub use metrics;
 use metrics_process::register_sysinfo_event;
 use metrics_prometheus::failure::strategy::{self, NoOp};
 use metrics_util::layers::FanoutBuilder;
-pub use middleware::HttpMetricMiddleware;
 use poem::EndpointExt;
 use poem::{
     handler,
@@ -60,7 +59,6 @@ use serde::{Deserialize, Serialize};
 
 #[cfg(feature = "system")]
 pub mod metrics_process;
-mod middleware;
 pub mod recorder;
 
 #[cfg(feature = "embed")]
@@ -184,12 +182,6 @@ pub fn build_dashboard_route_with_recorder(opts: DashboardOptions) -> (Dashboard
             "/api/metrics_value",
             api_metrics_value.data(recorder2.clone()),
         );
-
-    #[cfg(not(feature = "embed"))]
-    let route = route.nest(
-        "/",
-        StaticFilesEndpoint::new("./public/").index_file("index.html"),
-    );
 
     #[cfg(feature = "embed")]
     let route = route.at("/", EmbeddedFileEndpoint::<Files>::new("index.html"));
